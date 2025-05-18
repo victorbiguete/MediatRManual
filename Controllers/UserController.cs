@@ -1,4 +1,6 @@
-﻿using MediatRManual.Features.Users.Commands.Create;
+﻿using MediatRManual.Domain;
+using MediatRManual.Features.Users.Commands.Create;
+using MediatRManual.Features.Users.Queries.GetAllUser;
 using MediatRManual.Interface;
 using MediatRManual.Mediatr;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +19,7 @@ namespace MediatRManual.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("/Create")]
         public async Task<IActionResult> Create(CreateUserCommand command)
         {
             var result = await _mediator.Send<CreateUserCommand, bool>(command);
@@ -30,6 +32,17 @@ namespace MediatRManual.Controllers
             {
                 return BadRequest("Failed to create user");
             }
+        }
+
+        [HttpGet("/GetAllUser")]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var result = await _mediator.Send<GetAllUserQuery, List<User>>(new GetAllUserQuery());
+
+            if(result == null || result.Count == 0)
+                return NotFound("No users found");
+            
+            return Ok(result);
         }
     }
 }

@@ -1,4 +1,6 @@
+using MediatRManual.Domain;
 using MediatRManual.Features.Users.Commands.Create;
+using MediatRManual.Features.Users.Queries.GetAllUser;
 using MediatRManual.Infrastructure.Data;
 using MediatRManual.Interface;
 using MediatRManual.Mediatr;
@@ -18,6 +20,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 });
 builder.Services.AddScoped<IMediatr,Mediator>();
 builder.Services.AddScoped<IRequestHandler<CreateUserCommand,bool>,CreateUserHandler>();
+builder.Services.AddScoped<IRequestHandler<GetAllUserQuery,List<User>>,GetAllUserHandler>();
 
 var app = builder.Build();
 
