@@ -1,7 +1,9 @@
+using MediatRManual.Features.Users.Commands.Create;
 using MediatRManual.Infrastructure.Data;
 using MediatRManual.Interface;
 using MediatRManual.Mediatr;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddScoped<IMediatr,Mediator>();
+builder.Services.AddScoped<IRequestHandler<CreateUserCommand,bool>,CreateUserHandler>();
 
 var app = builder.Build();
 
@@ -22,6 +25,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
