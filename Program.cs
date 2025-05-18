@@ -1,4 +1,6 @@
 using MediatRManual.Infrastructure.Data;
+using MediatRManual.Interface;
+using MediatRManual.Mediatr;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IMediatr,Mediator>();
 
 var app = builder.Build();
 
