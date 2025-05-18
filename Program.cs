@@ -1,6 +1,9 @@
 using MediatRManual.Domain;
 using MediatRManual.Features.Users.Commands.Create;
+using MediatRManual.Features.Users.Commands.Delete;
+using MediatRManual.Features.Users.Commands.Update;
 using MediatRManual.Features.Users.Queries.GetAllUser;
+using MediatRManual.Features.Users.Queries.GetUserById;
 using MediatRManual.Infrastructure.Data;
 using MediatRManual.Interface;
 using MediatRManual.Mediatr;
@@ -21,6 +24,9 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 builder.Services.AddScoped<IMediatr,Mediator>();
 builder.Services.AddScoped<IRequestHandler<CreateUserCommand,bool>,CreateUserHandler>();
 builder.Services.AddScoped<IRequestHandler<GetAllUserQuery,List<User>>,GetAllUserHandler>();
+builder.Services.AddScoped<IRequestHandler<GetUserByIdQuery,User>,GetUserByIdHandler>();
+builder.Services.AddScoped<IRequestHandler<UpdateUserCommand,bool>,UpdateUserHandler>();
+builder.Services.AddScoped<IRequestHandler<DeleteUserByIdCommand,bool>,DeleteUserByIdHandler>();
 
 var app = builder.Build();
 
