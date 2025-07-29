@@ -101,4 +101,4 @@ CQRS-Mediator-Custom/
 
 ## 👨‍💻 Autor
 
-Desenvolvido por [Seu Nome](https://www.linkedin.com/in/seu-perfil).
+Desenvolvido por [Victor Biguete - Linkedln](https://www.linkedin.com/in/victorbiguete).
